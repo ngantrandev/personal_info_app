@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:personal_info_app/history_detail.dart';
+import 'package:personal_info_app/history_detail_card.dart';
 
 void main() {
   runApp(MaterialApp(
@@ -29,35 +30,6 @@ class _InfoCardState extends State<InfoCard> {
     HistoryDetail(detail: "Học tiếng Đức", age: 9),
     HistoryDetail(detail: "Học tiếng Tây Ban Nha", age: 10),
   ];
-
-  Widget getHistoryDetail(HistoryDetail item) {
-    return Card(
-      margin: EdgeInsets.fromLTRB(16.0, 16.0, 16.0, 0),
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            Text(
-              item.detail,
-              style: TextStyle(
-                fontSize: 20.0,
-                color: Colors.grey[800],
-              ),
-            ),
-            SizedBox(height: 6.0),
-            Text(
-              item.age.toString(),
-              style: TextStyle(
-                fontSize: 20.0,
-                color: Colors.grey[800],
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -145,8 +117,9 @@ class _InfoCardState extends State<InfoCard> {
             color: Colors.grey[800],
             child: ListView(
               shrinkWrap: true,
-              children:
-                  histories.map((item) => getHistoryDetail(item)).toList(),
+              children: histories
+                  .map((item) => HistoryDetailCard(item: item))
+                  .toList(),
             ),
           )
         ]),
