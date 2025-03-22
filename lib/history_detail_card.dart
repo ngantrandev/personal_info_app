@@ -3,8 +3,10 @@ import 'package:personal_info_app/history_detail.dart';
 
 class HistoryDetailCard extends StatelessWidget {
   final HistoryDetail item;
+  final Function delete;
 
-  const HistoryDetailCard({super.key, required this.item});
+  const HistoryDetailCard(
+      {super.key, required this.item, required this.delete});
 
   @override
   Widget build(BuildContext context) {
@@ -30,6 +32,18 @@ class HistoryDetailCard extends StatelessWidget {
                 color: Colors.grey[800],
               ),
             ),
+            ElevatedButton(
+              onPressed: () {
+                delete();
+              },
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(Icons.delete),
+                  Text("Delete"),
+                ],
+              ),
+            )
           ],
         ),
       ),

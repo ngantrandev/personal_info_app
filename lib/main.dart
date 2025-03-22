@@ -118,7 +118,14 @@ class _InfoCardState extends State<InfoCard> {
             child: ListView(
               shrinkWrap: true,
               children: histories
-                  .map((item) => HistoryDetailCard(item: item))
+                  .map((item) => HistoryDetailCard(
+                        item: item,
+                        delete: () {
+                          setState(() {
+                            histories.remove(item);
+                          });
+                        },
+                      ))
                   .toList(),
             ),
           )
