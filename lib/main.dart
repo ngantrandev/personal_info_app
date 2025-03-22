@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:personal_info_app/history_detail.dart';
 
 void main() {
   runApp(MaterialApp(
@@ -16,6 +17,18 @@ class InfoCard extends StatefulWidget {
 
 class _InfoCardState extends State<InfoCard> {
   int yourAge = 0;
+
+  List<HistoryDetail> histories = [
+    HistoryDetail(detail: "Học võ vovinam", age: 2),
+    HistoryDetail(detail: "Học lập trình", age: 3),
+    HistoryDetail(detail: "Học tiếng Anh", age: 4),
+    HistoryDetail(detail: "Học tiếng Nhật", age: 5),
+    HistoryDetail(detail: "Học tiếng Hàn", age: 6),
+    HistoryDetail(detail: "Học tiếng Trung", age: 7),
+    HistoryDetail(detail: "Học tiếng Pháp", age: 8),
+    HistoryDetail(detail: "Học tiếng Đức", age: 9),
+    HistoryDetail(detail: "Học tiếng Tây Ban Nha", age: 10),
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -96,7 +109,18 @@ class _InfoCardState extends State<InfoCard> {
                     letterSpacing: 1.0,
                   )),
             ],
-          )
+          ),
+          SizedBox(height: 30.0),
+          Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: histories
+                  .map((item) => Text("${item.detail} - ${item.age} tuổi",
+                      style: TextStyle(
+                        color: Colors.grey[400],
+                        fontSize: 18.0,
+                        letterSpacing: 1.0,
+                      )))
+                  .toList())
         ]),
       ),
     );
