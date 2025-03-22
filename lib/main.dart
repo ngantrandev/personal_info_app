@@ -7,8 +7,15 @@ void main() {
   ));
 }
 
-class InfoCard extends StatelessWidget {
-  const InfoCard({Key? key}) : super(key: key);
+class InfoCard extends StatefulWidget {
+  const InfoCard({super.key});
+
+  @override
+  State<InfoCard> createState() => _InfoCardState();
+}
+
+class _InfoCardState extends State<InfoCard> {
+  int yourAge = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -23,6 +30,18 @@ class InfoCard extends StatelessWidget {
           color: Colors.white,
           fontSize: 20.0,
           fontWeight: FontWeight.bold,
+        ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          setState(() {
+            yourAge++;
+          });
+        },
+        backgroundColor: Colors.grey[800],
+        child: Icon(
+          Icons.add,
+          color: Colors.white,
         ),
       ),
       body: Padding(
@@ -58,7 +77,7 @@ class InfoCard extends StatelessWidget {
                 letterSpacing: 2.0,
               )),
           SizedBox(height: 10.0),
-          Text("18",
+          Text("$yourAge",
               style: TextStyle(
                 color: Colors.amberAccent,
                 letterSpacing: 2.0,
