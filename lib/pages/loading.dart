@@ -11,14 +11,21 @@ class LoadingScreen extends StatefulWidget {
 }
 
 class _LoadingScreenState extends State<LoadingScreen> {
-  void getData() async {
-    Response res =
-        await get(Uri.parse("https://jsonplaceholder.typicode.com/todos/1"));
+  DateTime? currentTime;
+
+  void getTime() async {
+    Response res = await get(
+        Uri.parse(
+            "https://api.api-ninjas.com/v1/worldtime?timezone=Asia/Jakarta"),
+        headers: {
+          "x-api-key": "U7DvX2AqRuBaTNT3c4L9sw==ErophonyTXIECIDY",
+        });
 
     Map data = jsonDecode(res.body);
 
-    print(data);
-    print(data["title"]);
+    setState(() {
+      currentTime = DateTime.parse(data["datetime"]);
+    });
   }
 
   @override
@@ -26,13 +33,14 @@ class _LoadingScreenState extends State<LoadingScreen> {
     // TODO: implement initState
     super.initState();
 
-    getData();
+    getTime();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(child: Text("Loading...")),
+      body:
+          SafeArea(child: Center(child: Text("Current time is $currentTime"))),
     );
   }
 }
