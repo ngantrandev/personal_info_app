@@ -1,4 +1,4 @@
-package com.example.personal_info_app
+package com.example.world_time_app
 
 import io.flutter.embedding.android.FlutterActivity
 
