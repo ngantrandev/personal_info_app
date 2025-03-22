@@ -30,6 +30,35 @@ class _InfoCardState extends State<InfoCard> {
     HistoryDetail(detail: "Học tiếng Tây Ban Nha", age: 10),
   ];
 
+  Widget getHistoryDetail(HistoryDetail item) {
+    return Card(
+      margin: EdgeInsets.fromLTRB(16.0, 16.0, 16.0, 0),
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Text(
+              item.detail,
+              style: TextStyle(
+                fontSize: 20.0,
+                color: Colors.grey[800],
+              ),
+            ),
+            SizedBox(height: 6.0),
+            Text(
+              item.age.toString(),
+              style: TextStyle(
+                fontSize: 20.0,
+                color: Colors.grey[800],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -110,17 +139,16 @@ class _InfoCardState extends State<InfoCard> {
                   )),
             ],
           ),
-          SizedBox(height: 30.0),
-          Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: histories
-                  .map((item) => Text("${item.detail} - ${item.age} tuổi",
-                      style: TextStyle(
-                        color: Colors.grey[400],
-                        fontSize: 18.0,
-                        letterSpacing: 1.0,
-                      )))
-                  .toList())
+          SizedBox(height: 10.0),
+          Container(
+            height: 200.0,
+            color: Colors.grey[800],
+            child: ListView(
+              shrinkWrap: true,
+              children:
+                  histories.map((item) => getHistoryDetail(item)).toList(),
+            ),
+          )
         ]),
       ),
     );
