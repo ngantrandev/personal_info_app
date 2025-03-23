@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:world_time_app/services/world_time.dart';
 
 class ChooseLocationScreen extends StatefulWidget {
@@ -17,6 +18,19 @@ class _ChooseLocationScreenState extends State<ChooseLocationScreen> {
     WorldTime(location: "Sydney", flag: "australia", url: "Australia/Sydney"),
     WorldTime(location: "Tokyo", flag: "japan", url: "Asia/Tokyo"),
   ];
+
+  void updateTime(index) async {
+    WorldTime worldTime = listWorldTime[index];
+
+    await worldTime.getTime();
+
+    Navigator.pop(context, {
+      "location": worldTime.location,
+      "flag": worldTime.flag,
+      "time": DateFormat.jm().format(DateTime.parse(worldTime.time!)),
+      "isDayTime": worldTime.isDayTime
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +54,9 @@ class _ChooseLocationScreenState extends State<ChooseLocationScreen> {
           children: listWorldTime.map((item) {
             return Card(
               child: ListTile(
-                onTap: () {},
+                onTap: () {
+                  updateTime(listWorldTime.indexOf(item));
+                },
                 title: Text(item.location),
                 leading: CircleAvatar(
                   backgroundImage: AssetImage("assets/images/${item.flag}.png"),

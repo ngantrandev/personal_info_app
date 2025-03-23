@@ -12,7 +12,8 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    data = ModalRoute.of(context)?.settings.arguments as Map;
+    data =
+        data.isEmpty ? ModalRoute.of(context)?.settings.arguments as Map : data;
 
     String bgImage = data["isDayTime"] == true ? "day.png" : "night.png";
     Color? bgColor =
@@ -36,8 +37,18 @@ class _HomeScreenState extends State<HomeScreen> {
               child: Column(
                 children: [
                   ElevatedButton(
-                    onPressed: () {
-                      Navigator.pushNamed(context, "/location");
+                    onPressed: () async {
+                      dynamic result =
+                          await Navigator.pushNamed(context, "/location");
+
+                      setState(() {
+                        data = {
+                          "location": result["location"],
+                          "flag": result["flag"],
+                          "time": result["time"],
+                          "isDayTime": result["isDayTime"]
+                        };
+                      });
                     },
                     child: Text("Choose Location"),
                   ),
