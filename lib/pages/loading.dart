@@ -1,7 +1,5 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
-import 'package:http/http.dart';
+import 'package:world_time_app/services/world_time.dart';
 
 class LoadingScreen extends StatefulWidget {
   const LoadingScreen({super.key});
@@ -11,20 +9,15 @@ class LoadingScreen extends StatefulWidget {
 }
 
 class _LoadingScreenState extends State<LoadingScreen> {
-  DateTime? currentTime;
+  String? currentTime;
 
   void getTime() async {
-    Response res = await get(
-        Uri.parse(
-            "https://api.api-ninjas.com/v1/worldtime?timezone=Asia/Jakarta"),
-        headers: {
-          "x-api-key": "U7DvX2AqRuBaTNT3c4L9sw==ErophonyTXIECIDY",
-        });
-
-    Map data = jsonDecode(res.body);
+    WorldTime worldTime = WorldTime(
+        location: "Vietnam", flag: "Vietnam", url: "Asia/Ho_Chi_Minh");
+    await worldTime.getTime();
 
     setState(() {
-      currentTime = DateTime.parse(data["datetime"]);
+      currentTime = worldTime.time;
     });
   }
 
