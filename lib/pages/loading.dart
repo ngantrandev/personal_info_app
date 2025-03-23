@@ -9,17 +9,20 @@ class LoadingScreen extends StatefulWidget {
 }
 
 class _LoadingScreenState extends State<LoadingScreen> {
-  String? currentTime;
 
   void getTime() async {
     WorldTime worldTime = WorldTime(
         location: "Vietnam", flag: "Vietnam", url: "Asia/Ho_Chi_Minh");
     await worldTime.getTime();
 
-    setState(() {
-      currentTime = worldTime.time;
+    Navigator.pushReplacementNamed(context, "/home", arguments: {
+      "location": worldTime.location,
+      "flag": worldTime.flag,
+      "time": worldTime.time
     });
   }
+
+
 
   @override
   void initState() {
@@ -37,7 +40,7 @@ class _LoadingScreenState extends State<LoadingScreen> {
               child: Padding(
                 padding: const EdgeInsets.all(20.0),
                 child: Text(
-                        "Current time is $currentTime",
+                        "Loading time. . .",
                         style: TextStyle(
                             fontSize: 30, wordSpacing: 2, overflow: TextOverflow.clip),
                       ),

@@ -8,8 +8,14 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  Map data = {};
+
   @override
   Widget build(BuildContext context) {
+    data = ModalRoute.of(context)?.settings.arguments as Map;
+
+    print(data);
+
     return Scaffold(
       body: SafeArea(
           child: Column(

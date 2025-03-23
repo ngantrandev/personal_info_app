@@ -13,8 +13,7 @@ class WorldTime {
   Future<void> getTime() async {
     try {
       Response res = await get(
-          Uri.parse(
-              "https://api.api-ninjas.com/v1/worldtime?timezonesssssss=$url"),
+          Uri.parse("https://api.api-ninjas.com/v1/worldtime?timezone=$url"),
           headers: {
             "x-api-key": "U7DvX2AqRuBaTNT3c4L9sw==ErophonyTXIECIDY",
           });
