@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:dio/dio.dart';
 import 'package:http/http.dart';
 
 class WorldTime {
@@ -13,13 +14,17 @@ class WorldTime {
 
   Future<void> getTime() async {
     try {
-      Response res = await get(
-          Uri.parse("https://api.api-ninjas.com/v1/worldtime?timezone=$url"),
-          headers: {
-            "x-api-key": "U7DvX2AqRuBaTNT3c4L9sw==ErophonyTXIECIDY",
-          });
+      var res = await Dio()
+          .get("https://api.api-ninjas.com/v1/worldtime?timezone=$url",
+              options: Options(headers: {
+                "x-api-key": "U7DvX2AqRuBaTNT3c4L9sw==ErophonyTXIECIDY",
+              }));
 
-      Map data = jsonDecode(res.body);
+      print('res: $res');
+
+      Map<String, dynamic> data = res.data;
+
+      print("data: $data");
 
       int hour = int.parse(data["hour"]);
       isDayTime = hour > 6 && hour < 20 ? true : false;
