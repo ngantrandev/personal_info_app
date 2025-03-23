@@ -32,8 +32,16 @@ class _LoadingScreenState extends State<LoadingScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body:
-          SafeArea(child: Center(child: Text("Current time is $currentTime"))),
+      body: SafeArea(
+          child: Center(
+              child: Padding(
+                padding: const EdgeInsets.all(20.0),
+                child: Text(
+                        "Current time is $currentTime",
+                        style: TextStyle(
+                            fontSize: 30, wordSpacing: 2, overflow: TextOverflow.clip),
+                      ),
+              ))),
     );
   }
 }
