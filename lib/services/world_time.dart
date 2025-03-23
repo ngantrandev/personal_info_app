@@ -7,6 +7,7 @@ class WorldTime {
   String? time;
   String flag;
   String url;
+  bool isDayTime = false;
 
   WorldTime({required this.location, required this.flag, required this.url});
 
@@ -20,9 +21,15 @@ class WorldTime {
 
       Map data = jsonDecode(res.body);
 
+      int hour = int.parse(data["hour"]);
+      isDayTime = hour > 6 && hour < 20 ? true : false;
+
       time = DateTime.parse(data["datetime"]).toString();
     } catch (e) {
       print("got error: $e");
+
+      time = "Could not get time data";
+      isDayTime = false;
     }
   }
 

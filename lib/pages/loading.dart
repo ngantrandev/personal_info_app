@@ -19,7 +19,8 @@ class _LoadingScreenState extends State<LoadingScreen> {
     Navigator.pushReplacementNamed(context, "/home", arguments: {
       "location": worldTime.location,
       "flag": worldTime.flag,
-      "time": DateFormat.jm().format(DateTime.parse(worldTime.time!))
+      "time": DateFormat.jm().format(DateTime.parse(worldTime.time!)),
+      "isDayTime": worldTime.isDayTime
     });
   }
 
